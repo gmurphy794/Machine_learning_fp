@@ -17,16 +17,16 @@
 <div class="container">
     <div class="row">
         <div class="col mx-auto">
-            <!-- <img src="{{url_for('static', filename='favicon.png')}}" height=150px width=auto> -->
-            <h4 align="center" class="text-color" style="font-weight:100">Yelp Sentiment Analysis</h4>
+            
+            <h4 align="center" class="text-color" style="font-weight:100"><img style="padding-bottom: 3px;padding-right:2px;" src="{{url_for('static', filename='favicon.png')}}" height=25px width=auto>&nbsp;Yelp Sentiment Analysis</h4>
         </div>
     </div>
     <div class="row">
             <div class="input-group">
                     <div class="col-9 mx-auto">
                         <div class="input-group mb-3">
-                                <input onkeyup="generateLink()" id="business" type="text" class="form-control text-color" placeholder="Business" aria-label="Business" aria-describedby="button-addon2">
-                                <input onkeyup="generateLink()" id="location" type="text" aria-label="Location" class="form-control text-color" placeholder="Location">
+                                <input onkeyup="generateLink(event)" id="business" type="text" class="form-control" placeholder="Find" aria-label="Find" aria-describedby="button-addon2">
+                                <input onkeyup="generateLink(event)" id="location" type="text" aria-label="Near" class="form-control" placeholder="Near">
                                 <div class="input-group-append">
             
                                 <button onclick="getData()" id="scrapeSearch" class="btn btn-outline-secondary" type="button">Search</button>
@@ -38,13 +38,13 @@
     </div> 
     <div class="row">
         <div class="col-9 mx-auto">
-                    <div id="progressBar" class="progress" style="height:5px">
+                    <div id="progressBar" class="progress" style="height:4px">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                     </div>
         </div>
 
         <div class="col-9 mx-auto">
-            <h1 class="text-color" id="finalResult"></h1>
+            <h1 id="finalResult"></h1>
 
 
         </div>

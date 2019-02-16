@@ -15,3 +15,15 @@ body{
 
 
 }
+
+.progress-bar{
+
+    background-color:  #009CD1;
+}
+
+#finalResult{
+    /* text-align: justify;
+    text-justify: inter-word; */
+    color: #009CD1;
+
+}
