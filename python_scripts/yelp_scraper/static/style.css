@@ -19,11 +19,24 @@ body{
 .progress-bar{
 
     background-color:  #009CD1;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 #finalResult{
     /* text-align: justify;
     text-justify: inter-word; */
-    color: #009CD1;
+    /* color: #009CD1; */
+    color: #91A0BD;
+
+}
+
+a{
+    color:  #009CD1;
+}
+
+a:hover{
+
+    color:  #009CD1;
 
 }

@@ -8,6 +8,10 @@ import pandas as pd
 df = ""
 business_name = ""
 business_rating = ""
+business_page = ""
+business_page = ""
+percent_complete = 100
+complete = 0
 
 # Yelp Scraper Function
 def scraper_function(user_location,user_search):
@@ -15,6 +19,10 @@ def scraper_function(user_location,user_search):
         global df
         global business_name
         global business_rating
+        global business_page
+        global percent_complete
+        global complete
+
         # Get URL For Top Hit in Search
         search_url = "https://www.yelp.com/search?find_desc=" + user_search + "&find_loc=" + user_location
         print(f"search url: {search_url}")
@@ -43,10 +51,12 @@ def scraper_function(user_location,user_search):
         comments = []
         published_dates = []
         ratings = []
+        percent_complete = 10
 
         # Iterate Through Pages
         for i in range(3):
-            next_page = business_page + f"?start={i*20}"
+            percent_complete += 30
+            next_page = business_page.split("?")[0] + f"?start={i*20}"
             response = requests.get(next_page)
             business_soup = bs(response.text,"lxml")
             raw_comments = business_soup.find_all("p",itemprop="description")
@@ -61,23 +71,29 @@ def scraper_function(user_location,user_search):
             
             business_rating = raw_ratings[0].get("content")
             
-            raw_ratings = raw_ratings[1:len(raw_ratings)]
+            raw_ratings = raw_ratings = raw_ratings[1:21]
             
             [ratings.append(rating.get("content")) for rating in raw_ratings]
 
         print(f"business overall rating: {business_rating}")
 
         # Create Final DataFrame
+        print(len(published_dates))
+        print(len(comments))
+        print(len(ratings))
         df = pd.DataFrame({"Published Date":published_dates,
                         "Comment": comments,
                         "Rating" : ratings})
+        complete = 1
 
     except:
         df = pd.Series({"Published Date":"ERROR",
                         "Comment": "ERROR",
                         "Rating" : "ERROR"})
+
         business_name = "ERROR"
         business_rating = "ERROR"
+        complete = 1
 
 
 # Initialize Flask
@@ -89,10 +105,18 @@ def home():
 
     return render_template("index.html")
 
+@app.route("/percentComplete")
+def loading():
+    percent_series = pd.Series({"PERCENT_COMPLETE":percent_complete,
+                                "COMPLETE" : complete})
+    percent_json = percent_series.to_json(orient="index")
+
+    return percent_json
 
 @app.route("/scrape")
 def scrape():
-
+    global complete
+    complete = 0
     user_location = request.args["location"]
 
     user_search = request.args["search"]
@@ -104,10 +128,12 @@ def scrape():
 
     # Run df results through Model HERE
     sentiment = "positive"
-
+    complete = 1
     final_df = pd.Series({"BUSINESS_NAME" : business_name,
                              "BUSINESS_RATING":business_rating,
-                             "SENTIMENT":sentiment})
+                             "SENTIMENT":sentiment,
+                             "BUSINESS_URL":business_page,
+                             "COMPLETE": complete})
 
     final_json = final_df.to_json(orient="index")
 
