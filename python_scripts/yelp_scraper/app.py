@@ -94,8 +94,7 @@ def scraper_function(user_location,user_search):
         business_name = "ERROR"
         business_rating = "ERROR"
         complete = 1
-
-
+        
 # Initialize Flask
 app = Flask(__name__)
 
@@ -127,6 +126,10 @@ def scrape():
     df.head()
 
     # Run df results through Model HERE
+    #
+    #
+    #
+
     sentiment = "positive"
     complete = 1
     final_df = pd.Series({"BUSINESS_NAME" : business_name,
