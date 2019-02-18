@@ -59,7 +59,11 @@ function getData(){
             document.getElementById("finalResult").innerHTML = `The general sentiment for <a href='${business_page}' target='_blank'>${business_name}</a> is ${sentiment}.`;
             document.getElementById("business").readOnly = false;
             document.getElementById("location").readOnly = false;
-            document.getElementById("scrapeSearch").disabled = false;}
+            document.getElementById("scrapeSearch").disabled = false;
+            document.getElementById("business").value = "";
+            document.getElementById("location").value = "";
+        
+            }
 
             else{
                 // console.log(data);
@@ -68,7 +72,10 @@ function getData(){
                 document.getElementById("finalResult").innerHTML = `There was an error retrieving the Yelp data. Please try again.`;
                 document.getElementById("business").readOnly = false;
                 document.getElementById("location").readOnly = false;
-                document.getElementById("scrapeSearch").disabled = false;}
+                document.getElementById("scrapeSearch").disabled = false;
+                document.getElementById("business").value = "";
+                document.getElementById("location").value = "";
+            }
 
     })}
 
