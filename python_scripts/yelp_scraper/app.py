@@ -52,9 +52,10 @@ def scraper_function(user_location,user_search):
         published_dates = []
         ratings = []
         percent_complete = 10
-
+        cycles = 3
+        
         # Iterate Through Pages
-        for i in range(3):
+        for i in range(cycles):
             percent_complete += 30
             next_page = business_page.split("?")[0] + f"?start={i*20}"
             response = requests.get(next_page)
@@ -75,12 +76,14 @@ def scraper_function(user_location,user_search):
             
             [ratings.append(rating.get("content")) for rating in raw_ratings]
 
+        print(f"got {len(ratings)} ratings")
+        if len(ratings) != 20*cycles:
+
+            raise ValueError("There are less than 60 reviews for this business.")
+
         print(f"business overall rating: {business_rating}")
 
         # Create Final DataFrame
-        print(len(published_dates))
-        print(len(comments))
-        print(len(ratings))
         df = pd.DataFrame({"Published Date":published_dates,
                         "Comment": comments,
                         "Rating" : ratings})
