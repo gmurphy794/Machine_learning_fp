@@ -8,14 +8,6 @@ body{
     color: #91A0BD;
 }
 
-.btn-outline-secondary{
-
-
-    color: #91A0BD !important;
-
-
-}
-
 .progress-bar{
 
     background-color:  #009CD1;
@@ -38,5 +30,29 @@ a{
 a:hover{
 
     color:  #009CD1;
+
+}
+
+input[type="text"]{
+
+    font-weight:100;
+}
+
+.btn{
+
+    font-weight:100;
+
+}
+
+.btn-outline-secondary{
+
+    border-color: #91A0BD;
+    color:#91A0BD;
+}
+
+.btn-outline-secondary:hover{
+
+    background-color: #009CD1;
+    color:white;
 
 }
