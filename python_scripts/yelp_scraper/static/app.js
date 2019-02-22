@@ -88,7 +88,7 @@ function sleep(ms) {
 async function getPercent(){
     complete = 0;
     for (var i = 0; i < 20; i++){
-        await sleep(2000);
+        await sleep(1000);
     d3.json("/percentComplete").then(function(data){
 
         
